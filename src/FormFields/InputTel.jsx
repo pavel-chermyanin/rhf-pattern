@@ -19,7 +19,7 @@ const InputTel = ({ name, placeholder, validation, label }) => {
     const defaultValidation = {
         required: 'Поле обязательно для заполнения',
         pattern: {
-            value: /^(\+7 \()(\d{3}(\)) \d{3}-\d{2}-\d{2})?$/,
+            value: /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/,
             message: 'Неполный номер',
         },
         ...validation,
