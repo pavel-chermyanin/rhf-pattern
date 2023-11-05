@@ -19,7 +19,7 @@ const InputTel = ({ name, placeholder, validation, label }) => {
     const defaultValidation = {
         required: 'Поле обязательно для заполнения',
         pattern: {
-            value: /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/,
+            value: /^(\+7 \()(\d{3}(\)) \d{3}-\d{2}-\d{2})?$/,
             message: 'Неполный номер',
         },
         ...validation,
@@ -27,6 +27,14 @@ const InputTel = ({ name, placeholder, validation, label }) => {
 
     const handleClearInput = () => {
         setValue(name, ''); // Очищаем
+        trigger();
+    };
+
+    const handleBlur = (e) => {
+        const value = e.target.value;
+        if (value === '+7 (') {
+            value = ''; // Если введено только "+7 (", затрите значение
+        }
         trigger();
     };
 
@@ -40,6 +48,7 @@ const InputTel = ({ name, placeholder, validation, label }) => {
                 id={name}
                 type="tel"
                 maskChar={''}
+                onBlur={handleBlur}
             />
         </FieldWrapper>
     );
